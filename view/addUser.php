@@ -4,6 +4,7 @@
 ?>
 
 <?php session_start();
+
 if(isset ( $_SESSION[ 'errors' ] )){
     $errors = $_SESSION[ 'errors' ];
     $email = $_SESSION[ 'email' ];
@@ -23,25 +24,33 @@ if(isset ( $_SESSION[ 'errors' ] )){
         
         <div class="row justify-content-center">
             <div class="col-8 col-md-8 col-sm-10 p-3 border border-info bg-light rounded rounded-3 shadow shadow-2">
+            <?php if(isset($_SESSION[ 'message' ])): ?>    
+            <div class="card border border-success">
+                <div class="card-body bg-light">
+                    <?=$_SESSION['message'] ?>
+                    <?php unset( $_SESSION['message'] ) ?>
+                </div>
+            </div>
+            <?php endif; ?>
                     <h1>Add User</h1> 
                     <form action="?action=saveuser" method="post">
             <div class="form-group">
                 <label for="name">Name:</label>
-                <input type="text" class="form-control" id="name" name="name" value=<?php if(isset($name)){echo($name);} ?> >
+                <input type="text" class="form-control <?php if(isset($errors[ "name" ])){echo("border border-danger");} ?>" id="name" name="name" value=<?php if(isset($name)){echo($name);} ?> >
                 <?php if ( isset( $errors["name"] ) ): ?> 
                             <div class='text-danger'><?= $errors["name"]?></div>
                 <?php endif; ?>
             </div>
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" name="email" value=<?php if(isset($email)){echo($email);} ?>>
+                <input type="email" class="form-control <?php if(isset($errors[ "email" ])){echo("border border-danger");} ?>" id="email" name="email" value=<?php if(isset($email)){echo($email);} ?>>
                 <?php if ( isset( $errors["email"] ) ): ?> 
                             <div class='text-danger'><?= $errors["email"]?></div>
                 <?php endif; ?>
             </div>
             <div class="form-group">
                 <label for="age">Age:</label>
-                <input type="number" class="form-control" id="age" name="age" value=<?php if(isset($age)){echo($age);} ?> >
+                <input type="number" class="form-control <?php if(isset($errors[ "age" ])){echo("border border-danger");} ?>" id="age" name="age" value=<?php if(isset($age)){echo($age);} ?> >
                 <?php if ( isset( $errors["age"] ) ): ?> 
                             <div class='text-danger'><?= $errors["age"]?></div>
                 <?php endif; ?>

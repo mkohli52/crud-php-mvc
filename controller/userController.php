@@ -29,6 +29,10 @@ class UserController{
         $user = $this->userModel->update($data);
     }
 
+    public function deleteUser($id){
+        $user = $this->userModel->delete($id);
+    }
+
 
 }
 
